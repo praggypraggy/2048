@@ -5,6 +5,14 @@ var buf = [];
 
 const randCoord = () => {
   var p, q;
+  let flag = 0;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] === 0) flag = 1;
+    }
+  }
+  if (flag === 0)
+    return
   while (true) {
     p = Math.floor(Math.floor(Math.random() * 10) % 4);
     q = Math.floor(Math.floor(Math.random() * 10) % 4);
@@ -17,21 +25,35 @@ const randCoord = () => {
 
 const isGameOver = () => {
   let flag = 0;
+  let boardTemp = [];
   for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      if (board[i][j] === 0) {
-        flag = 1;
+    boardTemp[i] = [...board[i]];
+  }
+  const array = { 0: moveUp, 1: moveLeft, 2: moveDown, 3: moveRight };
+  for (let k = 0; k < 4; k++) {
+    array[k]([]);
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        if (board[i][j] === 0) {
+          flag = 1;
+        }
       }
-
-      if (board[i][j] === 2048) {
-        console.log('You won')
-      }
+    }
+    for (let i = 0; i < boardTemp.length; i++) {
+      board[i] = [...boardTemp[i]];
     }
   }
   if (flag === 0) {
     console.log('GAME OVER\n');
   }
-  return flag;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] > 1024) {
+        console.log('You win');
+        return
+      }
+    }
+  }
 };
 
 const newBuf = () => {
