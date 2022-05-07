@@ -54,6 +54,12 @@ const newGame = () => {
   console.log('New Game\n 𝘜𝘴𝘦 𝘞𝘈𝘚𝘋 𝘧𝘰𝘳 𝘮𝘰𝘷𝘦𝘴\n');
 };
 
+const callback = (callbackStack) => {
+  Array.from(callbackStack).forEach((item) => {
+    item();
+  });
+};
+
 const showBoard = () => {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
@@ -66,7 +72,7 @@ const showBoard = () => {
   }
 };
 
-const moveUp = (callback) => {
+const moveUp = (callbackStack) => {
   console.log('Move Up\n');
   for (let j = 0; j < 4; j++) {
     buf = newBuf();
@@ -84,12 +90,10 @@ const moveUp = (callback) => {
       board[i][j] = buf[i];
     }
   }
-  Array.from(callback).forEach((item) => {
-    item();
-  });
+  callback(callbackStack);
 };
 
-const moveDown = (callback) => {
+const moveDown = (callbackStack) => {
   console.log('Move Down\n');
   for (let j = 0; j < 4; j++) {
     buf = newBuf();
@@ -107,12 +111,10 @@ const moveDown = (callback) => {
       board[i][j] = buf[i];
     }
   }
-  Array.from(callback).forEach((item) => {
-    item();
-  });
+  callback(callbackStack);
 };
 
-const moveLeft = (callback) => {
+const moveLeft = (callbackStack) => {
   console.log('Move Left\n');
   for (let i = 0; i < 4; i++) {
     buf = newBuf();
@@ -130,12 +132,10 @@ const moveLeft = (callback) => {
       board[i][j] = buf[j];
     }
   }
-  Array.from(callback).forEach((item) => {
-    item();
-  });
+  callback(callbackStack);
 };
 
-const moveRight = (callback) => {
+const moveRight = (callbackStack) => {
   console.log('Move Right\n');
   for (let i = 0; i < 4; i++) {
     buf = newBuf();
@@ -153,13 +153,11 @@ const moveRight = (callback) => {
       board[i][j] = buf[j];
     }
   }
-  Array.from(callback).forEach((item) => {
-    item();
-  });
+  callback(callbackStack);
 };
 
 function main() {
-  const callback = [isGameOver, randCoord, showBoard];
+  const callbackStack = [isGameOver, randCoord, showBoard];
   var choice = 0, loop = 1;
   const switchStack = { 'W': moveUp, 'A': moveLeft, 'S': moveDown, 'D': moveRight };
   newGame();
@@ -180,7 +178,7 @@ function main() {
       break;
     }
     if (choice in switchStack) {
-      switchStack[choice](callback);
+      switchStack[choice](callbackStack);
     }
     else {
       console.log('Enter the correct Move');
