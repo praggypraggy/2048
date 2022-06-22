@@ -8,8 +8,6 @@ body{
   min-width: 363px;
 }
 .Dpad {
-  /* display: flex; */
-  /* font-size: 2em; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -44,19 +42,21 @@ body{
 
 #mainTable{
   display: flex;
-  /* flex-direction: column; */
   padding-top: 60px;
   justify-content: center;
   width: 100%;
-  /* color: orange;
-  color: #ffa500; */
 }
 
 #gOver{
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   width: 100%;
-  /* color: orange;
-  color: #ffa500; */
+}
+
+.scoreDiv{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 0vh;
+  color: rgb(5, 185, 5);
 }

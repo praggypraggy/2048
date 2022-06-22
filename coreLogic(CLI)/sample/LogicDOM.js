@@ -2,6 +2,8 @@ var mainDiv = document.getElementById('mainTable');
 
 var board = [];
 var buf = [];
+var score = 0;
+var gameOvercheck = false;
 
 const randCoord = () => {
   var p, q;
@@ -24,6 +26,7 @@ const randCoord = () => {
 };
 
 const isGameOver = () => {
+  gameOvercheck = true;
   let flag = 0;
   let boardTemp = [];
   for (let i = 0; i < board.length; i++) {
@@ -59,6 +62,7 @@ const isGameOver = () => {
       }
     }
   }
+  gameOvercheck = false;
 };
 
 const newBuf = () => {
@@ -74,6 +78,9 @@ const showBuf = () => {
 };
 
 const newGame = () => {
+  score = 0;
+  setScore(score);
+  gameOvercheck = false;
   mainDiv = document.getElementById('mainTable');
   document.getElementById('gOver').innerHTML = '';
 
@@ -83,6 +90,18 @@ const newGame = () => {
   randCoord();
   showBoardDOM();
 };
+
+const setScore = (val) => {
+  score = val;
+  document.getElementById('Score').innerHTML = score;
+}
+
+const scoreUpdate = (val) => {
+  if (!gameOvercheck) {
+    score += val;
+    setScore(score);
+  }
+}
 
 const callback = (callbackStack) => {
   Array.from(callbackStack).forEach((item) => {
@@ -142,7 +161,10 @@ const moveUp = (callbackStack) => {
     let k = 0;
     for (let i = 0; i < 4; i++) {
       if (board[i][j] !== 0) {
-        if (board[i][j] === buf[k - 1]) buf[k - 1] += board[i][j];
+        if (board[i][j] === buf[k - 1]) {
+          buf[k - 1] += board[i][j];
+          scoreUpdate(buf[k - 1]);
+        }
         else {
           buf[k] = board[i][j];
           k++;
@@ -163,7 +185,10 @@ const moveDown = (callbackStack) => {
     let k = 3;
     for (let i = 3; i >= 0; i--) {
       if (board[i][j] !== 0) {
-        if (board[i][j] === buf[k + 1]) buf[k + 1] += board[i][j];
+        if (board[i][j] === buf[k + 1]) {
+          buf[k + 1] += board[i][j];
+          scoreUpdate(buf[k + 1]);
+        }
         else {
           buf[k] = board[i][j];
           k--;
@@ -184,7 +209,10 @@ const moveLeft = (callbackStack) => {
     let k = 0;
     for (let j = 0; j < 4; j++) {
       if (board[i][j] !== 0) {
-        if (board[i][j] === buf[k - 1]) buf[k - 1] += board[i][j];
+        if (board[i][j] === buf[k - 1]) {
+          buf[k - 1] += board[i][j];
+          scoreUpdate(buf[k - 1]);
+        }
         else {
           buf[k] = board[i][j];
           k++;
@@ -205,7 +233,10 @@ const moveRight = (callbackStack) => {
     let k = 3;
     for (let j = 3; j >= 0; j--) {
       if (board[i][j] !== 0) {
-        if (board[i][j] === buf[k + 1]) buf[k + 1] += board[i][j];
+        if (board[i][j] === buf[k + 1]) {
+          buf[k + 1] += board[i][j];
+          scoreUpdate(buf[k + 1]);
+        }
         else {
           buf[k] = board[i][j];
           k--;
@@ -274,6 +305,17 @@ function loadBody() {
   var div = document.createElement('div');
   div.id = 'gOver';
   document.body.appendChild(div);
+
+  var scoreDiv = document.createElement('div');
+  scoreDiv.className = 'scoreDiv';
+  var h2 = document.createElement('h2');
+  h2.innerHTML = 'Score: '
+  var span = document.createElement('span');
+  span.id = 'Score';
+  span.innerHTML = score;
+  h2.appendChild(span);
+  scoreDiv.appendChild(h2);
+  document.body.appendChild(scoreDiv);
 }
 
 
