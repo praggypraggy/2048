@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
-*{
+* {
   font-family: 'Ubuntu', sans-serif;
 }
 
-body{
+body {
   min-width: 363px;
 }
+
 .Dpad {
   width: 100%;
   display: flex;
@@ -15,13 +16,13 @@ body{
   justify-content: center;
 }
 
-.newGame{
+.newGame {
   height: 60px;
   width: 120px;
   margin: 30px;
 }
 
-.closeGame{
+.closeGame {
   height: 60px;
   width: 120px;
   margin: 30px;
@@ -37,26 +38,126 @@ body{
 .box {
   width: 50px;
   height: 50px;
+}
+
+.spanBox {
+  width: 50px;
+  height: 50px;
+  display: none;
   text-align: center;
 }
 
-#mainTable{
+#mainTable {
   display: flex;
   padding-top: 60px;
   justify-content: center;
   width: 100%;
 }
 
-#gOver{
+#gOver {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.scoreDiv{
+.scoreDiv {
   display: flex;
   justify-content: center;
   width: 100%;
   bottom: 0vh;
   color: rgb(5, 185, 5);
+}
+
+.fade-in-bottom {
+  display: block;
+  position: fixed;
+  animation: fade-in-bottom 0.1s ease-in-out both;
+}
+
+@keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}.fade-in-top {
+  display: block;
+  position: fixed;
+  animation: fade-in-top 0.1s ease-in-out both;
+}
+
+@keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-left {
+  display: block;
+  position: fixed;
+  animation: fade-in-left 0.1s ease-in-out both;
+}
+
+@keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-right {
+  display: block;
+  position: fixed;
+  animation: fade-in-right 0.1s ease-in-out both;
+}
+
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  display: block;
+  position: fixed;
+  animation: fade-in 0.1s ease-in-out both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
